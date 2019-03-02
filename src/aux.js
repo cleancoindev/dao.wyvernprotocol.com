@@ -185,6 +185,7 @@ export const bind = (store, bindings) => {
       const etherBalance = await promisify(c => web3.eth.getBalance(config.deployed[network].WyvernDAO, c))
       var proposals = await Promise.all(_.range(numProposals).map(n => promisify(DAO.methods.proposals(n).call)))
       proposals = await Promise.all(proposals.map(async function (p, index) {
+        if (!p.metadataHash) return
         const hash = Buffer.from(p.metadataHash.slice(2), 'hex').toString()
         var metadata = await promisify(c => ipfs.files.cat(hash, c))
         metadata = JSON.parse(metadata.toString())
@@ -205,14 +206,17 @@ export const bind = (store, bindings) => {
           hasVoted: hasVoted,
           numberOfVotes: new BigNumber(p.numberOfVotes)
         }
-      }))
+      })).filter(x => x !== undefined)
 
+      /*
       events = await promisify(c => DAO.getPastEvents('allEvents', {fromBlock: 0}, c))
       events = events.map(e => {
         if (e.returnValues.numberOfTokens) e.returnValues.numberOfTokens = new BigNumber(e.returnValues.numberOfTokens)
         return e
       })
       events.reverse()
+      */
+      events = []
 
       dao = {
         address: config.deployed[network].WyvernDAO,
