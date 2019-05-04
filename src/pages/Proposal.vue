@@ -67,7 +67,7 @@ export default {
       const onConfirm = () => {
         this.voting = false
       }
-      this.$store.dispatch('vote', { params: [this.$route.params.id, support], onTxHash: onTxHash, onConfirm: onConfirm })
+      this.$store.dispatch('vote', { params: ['' + (parseInt(this.$route.params.id) + 1), support], onTxHash: onTxHash, onConfirm: onConfirm })
     },
     executeProposal: function() {
       const onTxHash = (txHash) => {
@@ -77,7 +77,7 @@ export default {
       const onConfirm = () => {
         this.voting = false
       }
-      this.$store.dispatch('executeProposal', { params: [this.$route.params.id, this.proposal.metadata.bytecode], onTxHash: onTxHash, onConfirm: onConfirm })
+      this.$store.dispatch('executeProposal', { params: ['' + (parseInt(this.$route.params.id) + 1), this.proposal.metadata.bytecode], onTxHash: onTxHash, onConfirm: onConfirm })
     }
   },
   computed: {
