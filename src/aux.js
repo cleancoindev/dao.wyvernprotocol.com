@@ -67,7 +67,7 @@ const wrapSend = (web3, methodGen, abi, gasLimit) => {
     const Token = new web3.eth.Contract(WyvernToken.abi, config.deployed[network].WyvernToken)
     const method = methodGen(DAO, Token)
     await promisify(method.apply(this, params).call)
-    const txHash = await promisify(c => method.apply(this, params).send({from: state.web3.base.account, gasLimit: gasLimit}, c))
+    const txHash = await promisify(c => method.apply(this, params).send({ from: state.web3.base.account, gasLimit: gasLimit }, c))
     commit('commitTx', { txHash: txHash, abi: abi, params: params })
     onTxHash(txHash)
     track(web3, txHash, (success) => {
@@ -85,7 +85,14 @@ export const web3Actions = (provider) => {
     web3Provider = new Web3.providers.HttpProvider(provider)
   }
   const web3 = new Web3(web3Provider)
-  const ipfs = ipfsAPI({host: 'ipfs.infura.io', protocol: 'https'})
+  const ipfs = ipfsAPI({
+    host: 'ipfs.infura.io',
+    port: 5001,
+    protocol: 'https',
+    headers: {
+      authorization: 'Basic 25zTt79MKPjyEvgd131JPbAqnLA:08a40ec35dfe5f3651c9797dfa493574'
+    }
+  })
   const methodAbi = (c, m) => {
     return c.abi.filter(f => f.name === m)[0]
   }
@@ -98,7 +105,7 @@ export const web3Actions = (provider) => {
     createProposal: wrapAction(async ({ state, commit }, { title, description, address, amount, bytecode, onTxHash, onConfirm }) => {
       const wei = web3.utils.toWei(amount, 'ether')
       if (bytecode === 'null') bytecode = '0x'
-      const json = {title: title, description: description, bytecode: bytecode, version: 1}
+      const json = { title: title, description: description, bytecode: bytecode, version: 1 }
       const res = await ipfs.files.add(Buffer.from(JSON.stringify(json)))
       const hash = '0x' + Buffer.from(res[0].hash).toString('hex')
       return wrapSend(web3, (DAO, Token) => DAO.methods.newProposal, methodAbi(WyvernDAO, 'newProposal'), 500000)(
@@ -122,7 +129,14 @@ export const bind = (store, bindings) => {
     web3Provider = new Web3.providers.HttpProvider(provider)
   }
   const web3 = new Web3(web3Provider)
-  const ipfs = ipfsAPI({host: 'ipfs.infura.io', protocol: 'https'})
+  const ipfs = ipfsAPI({
+    host: 'ipfs.infura.io',
+    port: 5001,
+    protocol: 'https',
+    headers: {
+      authorization: 'Basic 25zTt79MKPjyEvgd131JPbAqnLA:08a40ec35dfe5f3651c9797dfa493574'
+    }
+  })
 
   window.ipfs = ipfs
   window.Buffer = Buffer

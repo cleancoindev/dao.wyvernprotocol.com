@@ -31,7 +31,7 @@ try {
 } catch (err) {
   logger.warn({ extra: { err } }, 'Could not parse provider from localStorage')
   if (!window.web3) {
-    const def = 'https://mainnet.infura.io/8jK7Ap7Z0o5ZfSZ5dyv6'
+    const def = 'https://mainnet.infura.io/v3/5753aae2c3154c4b8b03a9c350d8109e'
     provider = def
     state.web3provider = def
   }

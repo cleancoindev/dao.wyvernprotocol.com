@@ -10,8 +10,8 @@
   <md-select v-model="provider" name="provider" id="provider">
     <md-option value="injected">Injected Web3 (Metamask/Parity)</md-option>
     <md-option value="http://localhost:8545">Localhost (Parity/Geth)</md-option>
-    <md-option value="https://mainnet.infura.io/8jK7Ap7Z0o5ZfSZ5dyv6">Infura [Mainnet]</md-option>
-    <md-option value="https://rinkeby.infura.io/8jK7Ap7Z0o5ZfSZ5dyv6">Infura [Rinkeby]</md-option>
+    <md-option value="https://mainnet.infura.io/v3/5753aae2c3154c4b8b03a9c350d8109e">Infura [Mainnet]</md-option>
+    <md-option value="https://rinkebyfura.io/v3/5753aae2c3154c4b8b03a9c350d8109e">Infura [Rinkeby]</md-option>
   </md-select>
 </md-field>
 <md-list v-if="$store.state.web3.ready">
