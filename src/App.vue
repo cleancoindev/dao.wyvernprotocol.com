@@ -3,7 +3,9 @@
     <md-app>
       <md-app-toolbar class="md-primary">
         <img src="/img/logo-square-red-transparent-200x200.png" class="logo" />
-        <h3 class="md-title title">Wyvern Distributed Autonomous Organization</h3>
+        <h3 class="md-title title">
+          Wyvern Distributed Autonomous Organization
+        </h3>
         <h2 class="md-title subtitle" style="opacity: 0.5">Live Beta</h2>
         <div class="md-toolbar-section-end">
           <md-button @click="showNotifications = !showNotifications">
@@ -12,19 +14,35 @@
             <span class="badge yellow">{{ yellowNotificationCount }}</span>
             <span class="badge red">{{ redNotificationCount }}</span>
           </md-button>
-          <md-button @click="showRightDrawer = !showRightDrawer">Network Configuration</md-button>
+          <md-button @click="showRightDrawer = !showRightDrawer"
+            >Network Configuration</md-button
+          >
         </div>
       </md-app-toolbar>
       <md-app-drawer md-permanent="clipped">
         <md-list>
-          <router-link v-for="(item, index) in links" :key="index" :to="item.path">
-            <md-list-item :class="(item.path === '/' ? item.path === activePath : activePath.indexOf(item.path) === 0) ? 'active' : ''">
-              <md-icon>{{item.icon}}</md-icon>
-              <span class="md-list-item-text">{{item.name}}</span>
+          <router-link
+            v-for="(item, index) in links"
+            :key="index"
+            :to="item.path"
+          >
+            <md-list-item
+              :class="
+                (
+                  item.path === '/'
+                    ? item.path === activePath
+                    : activePath.indexOf(item.path) === 0
+                )
+                  ? 'active'
+                  : ''
+              "
+            >
+              <md-icon>{{ item.icon }}</md-icon>
+              <span class="md-list-item-text">{{ item.name }}</span>
             </md-list-item>
           </router-link>
         </md-list>
-      </md-app-drawer> 
+      </md-app-drawer>
       <md-app-drawer class="md-right" :md-active.sync="showNotifications">
         <Notifications />
       </md-app-drawer>
@@ -32,71 +50,75 @@
         <RightDrawer />
       </md-app-drawer>
       <md-app-content>
-      <router-view></router-view>
+        <router-view></router-view>
       </md-app-content>
     </md-app>
     <md-dialog-alert
-    :md-active.sync="error"
-    :md-content="$store.state.web3error"
-    v-on:md-closed="clearError"
-    md-confirm-text="OK" />
+      :md-active.sync="error"
+      :md-content="$store.state.web3error"
+      v-on:md-closed="clearError"
+      md-confirm-text="OK"
+    />
   </div>
 </template>
 
 <script>
-import RightDrawer from './components/RightDrawer'
-import Notifications from './components/Notifications'
+import RightDrawer from "./components/RightDrawer.vue";
+import Notifications from "./components/Notifications.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: { RightDrawer, Notifications },
   metaInfo: {
-    title: '',
-    titleTemplate: 'Wyvern DAO • %s'
+    title: "",
+    titleTemplate: "Wyvern DAO • %s",
   },
   watch: {
-    web3error (n, o) {
-      if (n) this.error = true
-    }
+    web3error(n, o) {
+      if (n) this.error = true;
+    },
   },
   methods: {
-    clearError: function() {
-      this.$store.commit('clearWeb3Error')
-    }
+    clearError: function () {
+      this.$store.commit("clearWeb3Error");
+    },
   },
   computed: {
-    web3error: function() {
+    web3error: function () {
       return this.$store.state.web3error;
     },
-    activePath: function() {
+    activePath: function () {
       return this.$route.path;
     },
-    greenNotificationCount: function() {
-      return this.$store.state.notifications.filter(n => n.status === 'ok').length;
+    greenNotificationCount: function () {
+      return this.$store.state.notifications.filter((n) => n.status === "ok")
+        .length;
     },
-    yellowNotificationCount: function() {
-      return this.$store.state.notifications.filter(n => n.status === 'warn').length;
+    yellowNotificationCount: function () {
+      return this.$store.state.notifications.filter((n) => n.status === "warn")
+        .length;
     },
-    redNotificationCount: function() {
-      return this.$store.state.notifications.filter(n => n.status === 'error').length;
-    }
+    redNotificationCount: function () {
+      return this.$store.state.notifications.filter((n) => n.status === "error")
+        .length;
+    },
   },
-  data: function() {
+  data: function () {
     return {
       error: false,
       showRightDrawer: false,
       showNotifications: false,
       links: [
-        { path: '/', name: 'Home', icon: 'home' },
-        { path: '/proposals', name: 'Proposals', icon: 'assignment' },
-        { path: '/assets', name: 'Assets', icon: 'money' },
-        { path: '/shareholders', name: 'Shareholders', icon: 'domain' },
-        { path: '/delegates', name: 'Delegates', icon: 'people' },
-        { path: '/help', name: 'Help', icon: 'help' }
-      ]
-    }
-  }
-}
+        { path: "/", name: "Home", icon: "home" },
+        { path: "/proposals", name: "Proposals", icon: "assignment" },
+        { path: "/assets", name: "Assets", icon: "money" },
+        { path: "/shareholders", name: "Shareholders", icon: "domain" },
+        { path: "/delegates", name: "Delegates", icon: "people" },
+        { path: "/help", name: "Help", icon: "help" },
+      ],
+    };
+  },
+};
 </script>
 
 <style>
@@ -130,7 +152,7 @@ body {
 .md-app {
   height: 100%;
 }
-  
+
 .logo {
   height: 50px;
   width: 50px;

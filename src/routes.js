@@ -1,11 +1,11 @@
-import Home from './pages/Home'
-import Proposals from './pages/Proposals'
-import Proposal from './pages/Proposal'
-import CreateProposal from './pages/CreateProposal'
-import Assets from './pages/Assets'
-import Shareholders from './pages/Shareholders'
-import Delegates from './pages/Delegates'
-import Help from './pages/Help'
+import Home from './pages/Home.vue'
+import Proposals from './pages/Proposals.vue'
+import Proposal from './pages/Proposal.vue'
+import CreateProposal from './pages/CreateProposal.vue'
+import Assets from './pages/Assets.vue'
+import Shareholders from './pages/Shareholders.vue'
+import Delegates from './pages/Delegates.vue'
+import Help from './pages/Help.vue'
 
 export default [
   { path: '/', component: Home },
