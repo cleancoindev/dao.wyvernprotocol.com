@@ -1,5 +1,6 @@
 #!/bin/sh
 
+mkdir -p docs
 cd docs && rm -rf * && cd ..
 yarn run poi
 mv dist/* docs
