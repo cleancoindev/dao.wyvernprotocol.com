@@ -16,7 +16,6 @@ module.exports = (options, req) => ({
     node: {
       fs: 'empty'
     },
-    externals: [/dtrace-provider$/, /safe-json-stringify$/, /fs$/],
     module: {
       noParse: [/dtrace-provider$/, /safe-json-stringify$/]
     }
