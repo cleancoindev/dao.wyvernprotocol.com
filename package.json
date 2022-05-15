@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
-    "basscss": "8.0.2",
+    "basscss": "8.1.0",
     "bignumber.js": "^9.0.2",
     "bluebird": "^3.5.1",
     "bs58": "^4.0.1",
