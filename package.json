@@ -16,7 +16,7 @@
     "bunyan": "^1.8.12",
     "chart.js": "^2.7.1",
     "ipfs-api": "^17.2.4",
-    "node-sass": "^7.0.1",
+    "node-sass": "^7.0.2",
     "sass-loader": "^10.1.1",
     "vue": "^2.5.0",
     "vue-chartjs": "^3.0.2",
